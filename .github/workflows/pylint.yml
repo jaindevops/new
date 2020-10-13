@@ -19,4 +19,4 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint --disable missing-docstring python/test.py -r n '--msg-template={path}:{line}: [{msg_id}({symbol}), {obj}] {msg}'
+        pylint --disable missing-docstring python/test/my_sum/test.py -r n '--msg-template={path}:{line}: [{msg_id}({symbol}), {obj}] {msg}'
