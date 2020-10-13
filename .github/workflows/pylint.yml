@@ -21,4 +21,7 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pylint --disable missing-docstring python/test/test.py -r n '--msg-template={path}:{line}: [{msg_id}({symbol}), {obj}] {msg}'
-        coverage run python/test/test.py
+     - name: Code Coverage
+       run: |
+         coverage run python/test/test.py     
+         coverage report
