@@ -1,5 +1,5 @@
-name = "Abhi"
-name = "Jain"
+NAME = "Abhi"
+SIRNAME = "Jain"
 
 
 print ("Hello world")
