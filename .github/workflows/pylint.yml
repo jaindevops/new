@@ -16,12 +16,15 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pylint
+        pip install pylint pre-commit
         pip install coverage
+    - name: PreCommit hooks
+      run: |
+        pre-commit run --all-files
     - name: Code Coverage
       run: |
         coverage run python/test/test.py
         coverage report
     - name: Analysing the code with pylint
       run: |
-        pylint --disable missing-docstring python/test/test.py -r n '--msg-template={path}:{line}: [{msg_id}({symbol}), {obj}] {msg}'
+        pylint --disable=W --disable missing-docstring python/test/test.py
