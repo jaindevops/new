@@ -20,4 +20,4 @@ jobs:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       uses: pullreminders/slack-action@master
       with:
-        args: '{\"channel\":\"GBC6NE38B\",\"text\":\"Hello world\"}'
+        args: '{\"channel\":\"G01D3PMFPU2\",\"attachments\": [{\"fallback\": \"Required plain-text summary of the attachment.\",\"color\": \"#36a64f\",\"author_link\": \"http://flickr.com/bobby/\",\"author_icon\": \"http://flickr.com/icons/bobby.jpg\",\"title\": \"Github Pull Request\",\"title_link\": \"https://github.com/jainahik/new/pull/25\",\"text\": \"Pull Request has been raised\",\"image_url\": \"http://my-website.com/path/to/image.jpg\",\"thumb_url\": \"http://example.com/path/to/thumb.png\"}]}'
