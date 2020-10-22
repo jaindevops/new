@@ -15,9 +15,20 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - uses: actions/checkout@v1
+      # Find the PR associated with this push, if there is one.
+    - uses: jwalton/gh-find-current-pr@v1
+      id: findPr
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+      # This will echo "Your PR is 7", or be skipped if there is no current PR.
+    - run: echo "Your PR is ${PR}"
+      if: success() && steps.findPr.outputs.number
+      env:
+        PR: ${{ steps.findPr.outputs.pr }}
     - name: Notify slack
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       uses: pullreminders/slack-action@master
       with:
-        args: '{\"channel\":\"G01D3PMFPU2\",\"attachments\": [{\"fallback\": \"Required plain-text summary of the attachment.\",\"color\": \"#36a64f\",\"author_link\": \"http://flickr.com/bobby/\",\"author_icon\": \"http://flickr.com/icons/bobby.jpg\",\"title\": \"Github Pull Request\",\"title_link\": \"https://github.com/jainahik/new/pull/25\",\"text\": \"Pull Request has been raised\",\"image_url\": \"http://my-website.com/path/to/image.jpg\",\"thumb_url\": \"http://example.com/path/to/thumb.png\"}]}'
+        args: '{\"channel\":\"G01D3PMFPU2\",\"attachments\": [{\"fallback\": \"Required plain-text summary of the attachment.\",\"color\": \"#36a64f\",\"author_link\": \"http://flickr.com/bobby/\",\"author_icon\": \"http://flickr.com/icons/bobby.jpg\",\"title\": \"Github Pull Request\",\"title_link\": \"https://github.com/jainahik/new/pull/${{ env.PR }}\",\"text\": \"Pull Request has been raised\",\"image_url\": \"http://my-website.com/path/to/image.jpg\",\"thumb_url\": \"http://example.com/path/to/thumb.png\"}]}'
