@@ -15,8 +15,8 @@ jobs:
       uses: atlassian/gajira-login@master
       env:
         JIRA_BASE_URL: http://34.67.80.18:8080
-        JIRA_USER_EMAIL: jain.abhi198@gmail.com
-        JIRA_API_TOKEN: 2ynSguGscecwP2fPbqxU6FEC
+        JIRA_USER_EMAIL: jain.abhi198
+        JIRA_API_TOKEN: ${{ secrets.JIRA_PASSWORD }}
 
     - name: Find Issue Key
       uses: ./
