@@ -1,30 +1,24 @@
-on:
-  push
+on: push
 
-name: Test Transition Issue
+name: Jira Example
 
 jobs:
-  test-transition-issue:
-    name: Transition Issue
+  build:
     runs-on: ubuntu-latest
+    name: Jira Example
     steps:
-    - name: Checkout
-      uses: actions/checkout@master
-
     - name: Login
       uses: atlassian/gajira-login@master
       env:
-        JIRA_BASE_URL: http://34.67.80.18:8080
-        JIRA_USER_EMAIL: jain.abhi198
+        JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+        JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
         JIRA_API_TOKEN: ${{ secrets.JIRA_PASSWORD }}
 
-    - name: Find Issue Key
-      uses: ./
+    - name: Jira TODO
+      uses: atlassian/gajira-todo@master
       with:
-        from: commits
-
-    - name: Transition issue
-      uses: atlassian/gajira-transition@master
-      with:
-        issue: ${{ steps.create.outputs.issue }}
-        transition: "In Progress"
+        project: GA
+        issuetype: Task
+        description: Created automatically via GitHub Actions
+      env:
+        GITHUB_TOKEN: ${{ secrets.NEW_GITHUB_TOKEN }}
