@@ -1,5 +1,5 @@
-name: Pylint/Coverage
-on: [push]
+name: Pylint-Check
+on: [pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
