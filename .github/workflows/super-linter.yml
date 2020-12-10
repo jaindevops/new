@@ -47,5 +47,5 @@ jobs:
         uses: github/super-linter@v3
         env:
           VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: pylint-coverage
+          DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.NEW_GITHUB_TOKEN }}
