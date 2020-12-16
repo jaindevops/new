@@ -17,6 +17,7 @@ jobs:
         pre-commit run --all-files
 
   Linting:
+    if: always()
     needs: Pre-Commit-Hook
     runs-on: ubuntu-latest
     steps:
@@ -34,6 +35,7 @@ jobs:
         pylint --disable=W --disable missing-docstring python/test/test.py
 
   Unit-Testing:
+    if: always()
     needs: Linting
     runs-on: ubuntu-latest
     steps:
