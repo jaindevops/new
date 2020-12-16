@@ -1,0 +1,52 @@
+name: Github-action-checks
+on: [pull_request]
+jobs:
+  Pre-Commit-Hook:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        pip install pre-commit
+    - name: PreCommit hooks
+      run: |
+        pre-commit run --all-files
+
+  Linting:
+    needs: Pre-Commit-Hook
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+ #   - name: Set up Python 3.8
+ #     uses: actions/setup-python@v1
+ #     with:
+ #       python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pylint
+    - name: Analysing the code with pylint
+      run: |
+        pylint --disable=W --disable missing-docstring python/test/test.py
+
+  Unit-Testing:
+    needs: Linting
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install coverage
+    - name: Code Coverage
+      run: |
+        coverage run python/test/test.py
+        coverage report
