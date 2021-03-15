@@ -1,9 +1,9 @@
 name: Ncgus Tracker
 on:
   push:
-    branches: [ master ]
+    branches: [ jainahik-patch-2 ]
   pull_request:
-    branches: [ master ]
+    branches: [ jainahik-patch-2 ]
 jobs:
   Build :
     runs-on: ubuntu-latest
