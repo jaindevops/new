@@ -22,10 +22,11 @@ jobs:
     - name: Archive test artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: upload appspec.yml
+        name: upload-appspec.yml
         path: |
           appspec.yml
     - name: Download a single artifact
       uses: actions/download-artifact@v2
       with:
-        name: appspec.yml
+        name: upload-appspec.yml
+
