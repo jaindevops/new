@@ -9,13 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: npm and gulp setup
-      uses: actions/setup-node@v2
-      with:
-        node-version: '12'
+#     - name: npm and gulp setup
+#       uses: actions/setup-node@v2
+#       with:
+#         node-version: '12'
     - name: Build steps execution
       run: |
         node --version
         npm --version
         gulp --version
         npm install
+    - name: Archive test artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: upload appspec.yml
+        path: |
+          appspec.yml
