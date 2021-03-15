@@ -1,21 +1,21 @@
 name: Ncgus Tracker
-on: [push]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 jobs:
   Build :
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Set up npm and gulp
+    - name: npm and gulp setup
       uses: actions/setup-node@v2
       with:
         node-version: '14'
-#    - name: Install dependencies
-#      run: |
-#        pip install pre-commit
-    - name: Execute build steps
+    - name: Build steps execution
       run: |
         node --version
         npm --version
-        npm install --save-dev gulp
         gulp --version
         npm install
