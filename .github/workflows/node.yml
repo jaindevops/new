@@ -25,8 +25,4 @@ jobs:
         name: upload-appspec.yml
         path: |
           appspec.yml
-    - name: Download a single artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: upload-appspec.yml
 
