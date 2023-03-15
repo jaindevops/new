@@ -1,14 +1,8 @@
----
 name: "user group sync"
 on:
-  workflow_dispatch:
-  # schedule:
-  ##   - cron: '1 0 * * *'
   push:
     branches:
       - github_user_sync
-    paths:
-      - teams/*.csv
 jobs:
   user-sync:
     runs-on: ubuntu-latest
