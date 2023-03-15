@@ -1,14 +1,13 @@
----
-name: "S2DL user group sync"
+name: "user group sync"
 on:
   workflow_dispatch:
   # schedule:
   #   - cron: '1 0 * * *'
   push:
     branches:
-      - ZRPSW-10374-automatic-github-user-management
-    paths:
-      - teams/*.csv
+      - github_user_sync
+    # paths:
+    #   - teams/*.csv
 jobs:
   user-sync:
     runs-on: ubuntu-latest
