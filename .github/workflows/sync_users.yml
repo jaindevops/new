@@ -1,9 +1,14 @@
-name: "user group sync"
+---
+name: "S2DL user group sync"
 on:
   workflow_dispatch:
+  # schedule:
+  #   - cron: '1 0 * * *'
   push:
     branches:
-      - github_user_sync
+      - ZRPSW-10374-automatic-github-user-management
+    paths:
+      - teams/*.csv
 jobs:
   user-sync:
     runs-on: ubuntu-latest
@@ -12,14 +17,19 @@ jobs:
       with:
         fetch-depth: 0
         persist-credentials: false
-    - uses: getsentry/action-github-app-token@v2
-      name: "Generate sync-bot token" 
-      id: psb-token
-      with:
-        app_id: "${{ secrets.TEST_SYNC_BOT_APP_ID }}"
-        private_key: "${{ secrets.TEST_SYNC_BOT_PRIVATE_KEY }}"
+    # - uses: getsentry/action-github-app-token@v1.0.4
+    #   name: "Generate phoenix-sync-bot token" 
+    #   id: psb-token
+    #   with:
+    #     app_id: "${{ secrets.PHOENIX_SYNC_BOT_APP_ID }}"
+    #     private_key: "${{ secrets.PHOENIX_SYNC_BOT_PRIVATE_KEY }}"
+    # - name: "Sync users to groups"
+    #   env:
+    #     GITHUB_TOKEN: "${{ steps.psb-token.outputs.token }}"
+    #     src_dir: "${{ github.workspace }}"
+    #   run: infrastructure/teams/sync_users.sh
     - name: "Sync users to groups"
       env:
-        GITHUB_TOKEN: "${{ steps.psb-token.outputs.token }}"
+        GITHUB_TOKEN: "${{ secrets.NEW_GITHUB_TOKEN }}"
         src_dir: "${{ github.workspace }}"
-      run: teams/sync_users.sh
+      run: infrastructure/teams/sync_users.sh

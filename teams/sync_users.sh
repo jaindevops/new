@@ -2,10 +2,14 @@
 
 set -xe
 
+
 auth_header="Authorization: Bearer ${GITHUB_TOKEN}"
 content_header="Accept: application/vnd.github.v3+json"
 org="abhi-organization"
 base_url="https://api.github.com/orgs/${org}/teams"
+
+
+curl -H "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/orgs/${org}/teams"
 
 # if [[ -d ${src_dir}/teams ]]; then
 # 	IFS=$'\n'
