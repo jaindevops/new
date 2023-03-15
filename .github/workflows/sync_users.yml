@@ -3,7 +3,7 @@ name: "user group sync"
 on:
   workflow_dispatch:
   # schedule:
-  #   - cron: '1 0 * * *'
+  ##   - cron: '1 0 * * *'
   push:
     branches:
       - github_user_sync
@@ -27,4 +27,4 @@ jobs:
       env:
         GITHUB_TOKEN: "${{ steps.psb-token.outputs.token }}"
         src_dir: "${{ github.workspace }}"
-      run: infrastructure/teams/sync_users.sh
+      run: teams/sync_users.sh
