@@ -16,7 +16,7 @@ jobs:
       with:
         fetch-depth: 0
         persist-credentials: false
-    # - uses: getsentry/action-github-app-token@v1.0.4
+    # - uses: getsentry/action-github-app-token@v2
     #   name: "Generate phoenix-sync-bot token" 
     #   id: psb-token
     #   with:
