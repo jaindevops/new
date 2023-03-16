@@ -1,7 +1,6 @@
 #!/bin/bash
 
-set -xe
-
+#set -xe
 
 auth_header="Authorization: Bearer ${GITHUB_TOKEN}"
 content_header="Accept: application/vnd.github.v3+json"
@@ -10,7 +9,7 @@ base_url="https://api.github.com/orgs/${org}/teams"
 
 
 # curl -H "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/orgs/${org}/teams"
-# src_dir="/Users/aj5731/Desktop/Personal_Repo/new"
+src_dir="/Users/aj5731/Desktop/Personal_Repo/new"
 
 
 if [[ -d ${src_dir}/teams ]]; then
@@ -26,33 +25,46 @@ if [[ -d ${src_dir}/teams ]]; then
     fi
     current_members_array=($current_members)
 
+      new_members=()
 	  for user_data in $(cat ${f} |grep -iv 'username'); do
       user_name=$(echo $user_data | awk '{split($0,a,","); print a[1]}')
-      echo "Adding ${user_name} to ${group_name}"
-	  	url="${base_url}/${group_name}/memberships/${user_name}"
-	  	update=$(curl -s -w "::%{http_code}" -X PUT -H "${auth_header}" -H "${content_header}" "${url}" -d '{"role": "member"}')
-	  	echo "${update}" | grep '::200'
-	  	if [[ $? != 0 ]] ; then
-	      echo "Failed to update - ${update}"
-	      exit 1
-	  	fi
+      if ! echo "${current_members}" | grep -q "${user_name}"; then
+        new_members+=("${user_name}")
+        fi
 	    current_members_array=("${current_members_array[@]/$user_name}")
 	  done
 
-    echo "Remaining users - ${current_members_array[*]}"
-
-	  for remaining_user in "${current_members_array[@]}"; do
-	    if [[ -n "${remaining_user}" ]]; then
-        echo "Removing ${remaining_user} from ${group_name}"
-        url="${base_url}/${group_name}/memberships/${remaining_user}"
-        echo "url: ${url}"
-  	    remove=$(curl -s -w "::%{http_code}" -X DELETE -H "${auth_header}" -H "${content_header}" "${url}")
-  	    echo "${remove}" | grep '::204'
-  	  	if [[ $? != 0 ]] ; then
-  	      exit 1
-  	      echo "Failed to remove - ${remove}"
-  	  	fi
+      if [[ ${#new_members[@]} -gt 0 ]]; then
+        echo "New members available to add : ${new_members[*]}"
+        for new_member in ${new_members[@]}; do
+            echo "Adding new member ${new_member} to ${group_name}"
+            url="${base_url}/${group_name}/memberships/${new_member}"
+            update=$(curl -s -w "::%{http_code}" -X PUT -H "${auth_header}" -H "${content_header}" "${url}" -d '{"role": "member"}')
+            echo "${update}" | grep '::200'
+            if [[ $? != 0 ]] ; then
+              echo "Failed to update - ${update}"
+              exit 1
+            fi
+        done
+      else
+        echo "No new member found to add to ${group_name}"
       fi
-	  done
-	done
+
+      echo "Remaining users - ${current_members_array[*]}"
+      if [[ ${#current_members_array[@]} -gt 0 ]]; then
+        for remaining_user in ${current_members_array[@]}; do
+            echo "Removing ${remaining_user} from ${group_name}"
+            url="${base_url}/${group_name}/memberships/${remaining_user}"
+            echo "url: ${url}"
+            remove=$(curl -s -w "::%{http_code}" -X DELETE -H "${auth_header}" -H "${content_header}" "${url}")
+            echo "${remove}" | grep '::204'
+            if [[ $? != 0 ]] ; then
+              exit 1
+              echo "Failed to remove - ${remove}"
+            fi
+        done
+       else
+         echo "No member found to be removed from ${group_name}"
+       fi
+   done
 fi
