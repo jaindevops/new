@@ -47,7 +47,7 @@ if [[ -d ${src_dir}/teams ]]; then
             fi
         done
       else
-        echo "No new member found to add to ${group_name}"
+        echo "No new member found to add to group: ${group_name}"
       fi
 
       echo "Remaining users - ${current_members_array[*]}"
@@ -64,7 +64,7 @@ if [[ -d ${src_dir}/teams ]]; then
             fi
         done
        else
-         echo "No member found to be removed from ${group_name}"
+         echo "No member found to be removed from group: ${group_name}"
        fi
    done
 fi
