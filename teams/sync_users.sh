@@ -16,7 +16,7 @@ if [[ -d ${src_dir}/teams ]]; then
 	IFS=$'\n'
   for f in $(find ${src_dir}/teams/*.csv -type f); do
     group_name=$(basename ${f} | awk '{split($0,a,"."); print a[1]}')
-    echo "Processing group ${group_name}"
+    echo "Processing group: ${group_name}"
     team_url="${base_url}/${group_name}/members"
 	  current_members=$(curl -X GET -H "${auth_header}" -H "${content_header}" "${team_url}" | jq -r .[].login)
     if [[ $? != 0 ]]; then

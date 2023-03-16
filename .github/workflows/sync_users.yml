@@ -1,8 +1,8 @@
 name: "user group sync"
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: '1 0 * * *'
+  schedule:
+    - cron: '1 0 * * *'
   push:
     branches:
       - github_user_sync
@@ -12,7 +12,7 @@ jobs:
   user-sync:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
       with:
         fetch-depth: 0
         persist-credentials: false
