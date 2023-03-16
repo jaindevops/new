@@ -50,8 +50,8 @@ if [[ -d ${src_dir}/teams ]]; then
         echo "No new member found to add to group: ${group_name}"
       fi
 
-      echo "Remaining users - ${current_members_array[*]}"
       if [[ ${#current_members_array[@]} -gt 0 ]]; then
+        echo "Remaining users - ${current_members_array[*]}"
         for remaining_user in ${current_members_array[@]}; do
             echo "Removing ${remaining_user} from ${group_name}"
             url="${base_url}/${group_name}/memberships/${remaining_user}"
