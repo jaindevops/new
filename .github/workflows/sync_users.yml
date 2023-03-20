@@ -16,19 +16,19 @@ jobs:
       with:
         fetch-depth: 0
         persist-credentials: false
-    # - uses: getsentry/action-github-app-token@v2
-    #   name: "Generate phoenix-sync-bot token" 
-    #   id: psb-token
-    #   with:
-    #     app_id: "${{ secrets.TEST_SYNC_BOT_APP_ID }}"
-    #     private_key: "${{ secrets.TEST_SYNC_BOT_PRIVATE_KEY }}"
-    # - name: "Sync users to groups"
-    #   env:
-    #     GITHUB_TOKEN: "${{ steps.psb-token.outputs.token }}"
-    #     src_dir: "${{ github.workspace }}"
-    #   run: teams/sync_users.sh
+    - uses: getsentry/action-github-app-token@v2
+      name: "Generate phoenix-sync-bot token" 
+      id: psb-token
+      with:
+        app_id: "${{ secrets.TEST_SYNC_BOT_APP_ID }}"
+        private_key: "${{ secrets.TEST_SYNC_BOT_PRIVATE_KEY }}"
     - name: "Sync users to groups"
       env:
-        GITHUB_TOKEN: "${{ secrets.NEW_GITHUB_TOKEN }}"
+        GITHUB_TOKEN: "${{ steps.psb-token.outputs.token }}"
         src_dir: "${{ github.workspace }}"
       run: teams/sync_users.sh
+    # - name: "Sync users to groups"
+    #   env:
+    #     GITHUB_TOKEN: "${{ secrets.NEW_GITHUB_TOKEN }}"
+    #     src_dir: "${{ github.workspace }}"
+    #   run: teams/sync_users.sh
