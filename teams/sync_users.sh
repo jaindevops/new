@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#set -xe
+set -xe
 
 auth_header="Authorization: Bearer ${GITHUB_TOKEN}"
 content_header="Accept: application/vnd.github.v3+json"
