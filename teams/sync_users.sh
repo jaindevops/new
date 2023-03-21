@@ -8,7 +8,7 @@ org="abhi-organization"
 base_url="https://api.github.com/orgs/${org}/teams"
 
 
-curl -H "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/orgs/${org}/teams"
+curl -H "Authorization: Bearer ${GITHUB_TOKEN}" "https://api.github.com/orgs/${org}/teams"
 #src_dir="/Users/aj5731/Desktop/Personal_Repo/new"
 
 # if [[ -d ${src_dir}/teams ]]; then
