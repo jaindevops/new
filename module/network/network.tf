@@ -8,5 +8,5 @@ resource "google_compute_network" "vpc_network" {
   name                    = "my-vpc"
   auto_create_subnetworks = false
   routing_mode            = "GLOBAL"
-  project                 = "var.project_id"
+  project                 = var.project_id
 }
