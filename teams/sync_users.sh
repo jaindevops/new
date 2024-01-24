@@ -22,6 +22,11 @@ if [[ -d ${src_dir}/teams ]]; then
       echo "Failed to get current members - ${current_members}"
       exit 1
     fi
+    # Check if the response is a single string, not an array
+if [[ ! ${current_members} =~ ^\[.*\]$ ]]; then
+  # If it's a single string, convert it to an array
+  current_members=("$current_members")
+fi
     current_members_array=($current_members)
 
     new_members=()
