@@ -66,5 +66,5 @@ if [[ -d ${src_dir}/teams ]]; then
 #     else
 #       echo "No member found to be removed from group: ${group_name}"
 #     fi
-#   done
-# fi
+  done
+fi
