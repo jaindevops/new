@@ -25,7 +25,7 @@ jobs:
     - name: Checkout private repo
       uses: actions/checkout@v2
       with:
-        repository: jaindevops/new
+        repository: jaindevops/terraform
         token: ${{ steps.my-app.outputs.token }}
     # - name: "Sync users to groups"
     #   env:
