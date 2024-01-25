@@ -18,15 +18,20 @@ jobs:
         persist-credentials: false
     - uses: getsentry/action-github-app-token@v2
       name: "Generate test-sync-bot token" 
-      id: psb-token
+      id: my-app
       with:
         app_id: "${{ secrets.TEST_SYNC_BOT_APP_ID }}"
         private_key: "${{ secrets.TEST_SYNC_BOT_PRIVATE_KEY }}"
-    - name: "Sync users to groups"
-      env:
-        GITHUB_TOKEN: "${{ steps.psb-token.outputs.token }}"
-        src_dir: "${{ github.workspace }}"
-      run: teams/sync_users.sh
+    - name: Checkout private repo
+      uses: actions/checkout@v2
+      with:
+        repository: jaindevops/new
+        token: ${{ steps.my-app.outputs.token }}
+    # - name: "Sync users to groups"
+    #   env:
+    #     GITHUB_TOKEN: "${{ steps.my-app.outputs.token }}"
+    #     src_dir: "${{ github.workspace }}"
+    #   run: teams/sync_users.sh
     # - name: "Sync users to groups"
     #   env:
     #     GITHUB_TOKEN: "${{ secrets.NEW_GITHUB_TOKEN }}"
