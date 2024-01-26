@@ -17,7 +17,7 @@ if [[ -d ${src_dir}/teams ]]; then
     group_name=$(basename ${f} | awk '{split($0,a,"."); print a[1]}'| xargs)
     echo "Processing group: ${group_name}"
     team_url="${base_url}/${group_name}/members"
-	  current_members=$(curl -X GET -H "${auth_header}" -H "${content_header}" "${team_url}" | jq -r .[].login)
+	  current_members=$(curl -X GET -H "${auth_header}" -H "${content_header}" "${team_url}"
     if [[ $? != 0 ]]; then
       echo "Failed to get current members - ${current_members}"
       exit 1
