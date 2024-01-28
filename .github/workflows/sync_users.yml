@@ -22,11 +22,11 @@ jobs:
       with:
         app_id: "${{ secrets.TEST_SYNC_BOT_APP_ID }}"
         private_key: "${{ secrets.TEST_SYNC_BOT_PRIVATE_KEY }}"
-    - name: Checkout private repo
-      uses: actions/checkout@v2
-      with:
-        repository: jaindevops/terraform
-        token: ${{ steps.my-app.outputs.token }}
+    # - name: Checkout private repo
+    #   uses: actions/checkout@v2
+    #   with:
+    #     repository: jaindevops/terraform
+    #     token: ${{ steps.my-app.outputs.token }}
     - name: "Sync users to groups"
       env:
         GITHUB_TOKEN: "${{ steps.my-app.outputs.token }}"
