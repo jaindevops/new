@@ -5,9 +5,10 @@ agent:
     type: f1-standard-2
     os_image: ubuntu2204
 blocks:
-  - name: 'Block #1'
+  - name: Test Job
     task:
       jobs:
         - name: 'Job #1'
           commands:
-            - checkout
+            - ls -l
+    dependencies: []
