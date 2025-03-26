@@ -9,7 +9,7 @@ global_job_config:
     - name: NAME
       value: Abhishek
     - name: FULL_NAME
-      value: $NAME
+      value: '${NAME}'
 blocks:
   - name: Test Job
     task:
