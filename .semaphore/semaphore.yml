@@ -4,11 +4,18 @@ agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu2004
+global_job_config:
+  env_vars:
+    - name: NAME
+      value: Abhishek
+    - name: FULL_NAME
+      value: $NAME
 blocks:
   - name: Test Job
     task:
       jobs:
-        - name: 'Job #1'
+        - name: Test_Job
           commands:
             - echo Hello World !
+            - echo $FULL_NAME
     dependencies: []
