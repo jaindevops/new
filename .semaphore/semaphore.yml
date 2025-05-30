@@ -19,3 +19,5 @@ blocks:
             - echo Hello World !
             - echo $FULL_NAME
     dependencies: []
+    run:
+      when: branch = 'feature-sem/test'
