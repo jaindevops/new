@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: abhi
+  namespace: argocd
+spec:
+  description: "Abhi's project"
+  # Allow applications to be deployed to any namespace on the local cluster
+  destinations:
+  - namespace: '*'
+    server: https://kubernetes.default.svc
+  # Allow applications to be sourced from any git repository
+  sourceRepos:
+  - '*'
+  # Allow manifests for all cluster-scoped resources
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  # Allow manifests for all namespaced-scoped resources
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
