@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx-app
+  name: abhi-argocd
   namespace: argocd
 spec:
-  project: default
+  project: Abhi
   source:
     repoURL: https://github.com/jaindevops/new.git
     targetRevision: argocd
-    path: new/argocd
+    path: new/nginx # Corrected path to your Kubernetes manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: default
