@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/jaindevops/new.git
     targetRevision: argocd
-    path: argocd
+    path: new/argocd
   destination:
     server: https://kubernetes.default.svc
     namespace: default
