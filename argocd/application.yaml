@@ -6,7 +6,7 @@ metadata:
 spec:
   project: abhi
   source:
-    repoURL: https://github.com/jaindevops/new.git
+    repoURL: git@github.com:jaindevops/new.git
     targetRevision: argocd
     path: argocd
     directory:
