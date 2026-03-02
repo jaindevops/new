@@ -1,0 +1,12 @@
+# This file tells Kustomize how to generate the final Kubernetes manifests.
+
+# List all the manifest files that are part of this application.
+resources:
+- deployment.yml
+- service.yml
+
+# The images section allows you to easily override the image tag.
+# Your CI/CD pipeline would update the `newTag` value.
+images:
+- name: nginx # This should match the image name in your deployment.yml
+  newTag: 1.23.0 # This is the new version you want to deploy.

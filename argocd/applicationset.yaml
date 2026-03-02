@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: abhi-applications
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - path: nginx
+      - path: nginx-1
+  template:
+    metadata:
+      name: 'abhi-argocd-{{path}}'
+      namespace: argocd
+    spec:
+      project: abhi
+      source:
+        repoURL: https://github.com/jaindevops/new.git
+        targetRevision: argocd
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
